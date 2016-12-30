@@ -1,42 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Player } from './player';
-
-const PLAYERS: Player[] = [
-  {
-    name: 'Kobe Bryant',
-    ranking: '1'
-  },
-  {
-    name: 'Lebron James',
-    ranking: '2'
-  },
-  {
-    name: 'Kevin Durant',
-    ranking: '3'
-  },
-  {
-    name: 'Demare Derozen',
-    ranking: '4'
-  },
-  {
-    name: 'Steph Curry',
-    ranking: '5'
-  },
-  {
-    name: 'Russell Westbrook',
-    ranking: '6'
-  }
-]
+import { PlayerService } from './player.service';
 
 @Component({
   selector: 'my-app',
   templateUrl: 'app/templates/app.html',
-  styleUrls: ['app/stylesheets/css/app.css']
+  styleUrls: ['app/stylesheets/css/app.css'],
+  providers: [PlayerService]
 })
-export class AppComponent  { 
-  players = PLAYERS;
+export class AppComponent implements OnInit  { 
+  players: Player[];
   title = 'Table Tennis World Ranking';
   selectedPlayer: Player;
+
+  constructor(private playerService: PlayerService) { }
+
+  getPlayers(): void {
+    this.playerService.getPlayers().then(players => this.players = players);
+  }
+
+  ngOnInit(): void {
+    this.getPlayers();
+  }
 
   onSelect(player: Player): void {
     this.selectedPlayer = player;
