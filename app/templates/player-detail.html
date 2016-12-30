@@ -1,0 +1,8 @@
+<div class="player-detail__wrapper" *ngIf="player">
+    <h2>{{player.name}} details!</h2>
+    <div><label>ranking: </label>{{player.ranking}}</div>
+    <div>
+        <label>name: </label>
+        <input [(ngModel)]="player.name" placeholder="name"/>
+    </div>
+</div>
