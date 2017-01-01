@@ -1,0 +1,7 @@
+<div class="players-list">
+    <md-nav-list>
+        <md-list-item *ngFor="let player of players" [class.selected]="player === selectedPlayer">
+            <a md-line [routerLink]="['/player-details', player.id]" >{{player.ranking}}. {{player.name}}</a>
+        </md-list-item>
+    </md-nav-list>
+</div>

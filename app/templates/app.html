@@ -2,12 +2,5 @@
     <div class="title">
         <h1>{{title}}</h1>
     </div>
-    <div class="player-list">
-        <md-nav-list>
-            <md-list-item *ngFor="let player of players" [class.selected]="player === selectedPlayer" (click)="onSelect(player)">
-                {{player.ranking}}. {{player.name}}
-            </md-list-item>
-        </md-nav-list>
-    </div>
-    <player-detail [player]="selectedPlayer"></player-detail>
+    <router-outlet></router-outlet>
 </div>
