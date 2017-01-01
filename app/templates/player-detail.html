@@ -1,9 +1,26 @@
-<div class="player-detail__wrapper" *ngIf="player">
-    <h2>{{player.name}} details!</h2>
-    <div><label>ranking: </label>{{player.ranking}}</div>
-    <div>
-        <label>name: </label>
-        <input [(ngModel)]="player.name" placeholder="name"/>
-    </div>
+<div class="player-detail" *ngIf="player">
+    <md-card class="player-card">
+        <md-card-header class="player-card__header">
+            <div md-card-avatar class="player-avatar-image"></div>
+            <md-card-title>{{player.name}}</md-card-title>
+            <md-card-subtitle>Ranking: {{player.ranking}}</md-card-subtitle>
+        </md-card-header>
+        <md-card-content class="player-card__content">
+            <div class="player-card__content--static">
+                <p>
+                    Match history
+                </p>
+            </div>
+            <div class="player-card__content--edit" *ngIf="isEditing">
+                <div>
+                    <label>name: </label>
+                    <input [(ngModel)]="player.name" placeholder="name"/>
+                </div>
+            </div>
+        </md-card-content>
+        <md-card-actions class="player-card__actions">
+            <button md-button (click)="edit()">EDIT</button>
+            <button md-button (click)="goBack()">BACK</button>
+        </md-card-actions>
+    </md-card>
 </div>
-<button (click)="goBack()">Back</button>

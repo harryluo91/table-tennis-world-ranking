@@ -1,0 +1,11 @@
+.player-detail .player-card__header {
+  justify-content: center; }
+  .player-detail .player-card__header .player-avatar-image {
+    background-image: url("app/assets/ping-pong-ball.png");
+    background-size: cover; }
+
+.player-detail .player-card__content {
+  text-align: center; }
+
+.player-detail .player-card__actions {
+  text-align: center; }

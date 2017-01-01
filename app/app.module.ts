@@ -7,6 +7,7 @@ import { RouterModule }   from '@angular/router';
 import { AppComponent }  from './app.component';
 import { PlayersListComponent } from './players-list.component';
 import { PlayerDetailComponent } from './player-detail.component';
+import { AppRoutingModule }     from './app-routing.module';
 
 import { PlayerService } from './player.service';
 
@@ -15,21 +16,7 @@ import { PlayerService } from './player.service';
     BrowserModule,
     FormsModule,
     MaterialModule.forRoot(),
-    RouterModule.forRoot([
-      {
-        path: '',
-        redirectTo: '/players-list',
-        pathMatch: 'full'
-      },
-      {
-        path: 'players-list',
-        component: PlayersListComponent
-      },
-      {
-        path: 'player-details/:id',
-        component: PlayerDetailComponent
-      }
-    ])
+    AppRoutingModule
   ],
   declarations: [ AppComponent, PlayersListComponent, PlayerDetailComponent ],
   providers: [PlayerService],

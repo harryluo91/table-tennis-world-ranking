@@ -8,9 +8,11 @@ import { PlayerService } from './player.service';
 
 @Component({
   selector: 'player-detail',
-  templateUrl: 'app/templates/player-detail.html'
+  templateUrl: 'app/templates/player-detail.html',
+  styleUrls: ['app/stylesheets/css/player-detail.css']
 })
 export class PlayerDetailComponent implements OnInit {
+  isEditing: boolean;
   constructor(
     private heroService: PlayerService,
     private route: ActivatedRoute,
@@ -18,6 +20,7 @@ export class PlayerDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isEditing = false;
     this.route.params
       .switchMap((params: Params) => this.heroService.getPlayer(+params['id']))
       .subscribe(player => this.player = player);
@@ -26,7 +29,11 @@ export class PlayerDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+
+  edit(): void {
+    this.isEditing = !this.isEditing;
+  }
   
   @Input()
-  player: Player
+  player: Player;
 }
