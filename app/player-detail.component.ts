@@ -14,7 +14,7 @@ import { PlayerService } from './player.service';
 export class PlayerDetailComponent implements OnInit {
   isEditing: boolean;
   constructor(
-    private heroService: PlayerService,
+    private playerService: PlayerService,
     private route: ActivatedRoute,
     private location: Location
   ) {}
@@ -22,7 +22,7 @@ export class PlayerDetailComponent implements OnInit {
   ngOnInit(): void {
     this.isEditing = false;
     this.route.params
-      .switchMap((params: Params) => this.heroService.getPlayer(+params['id']))
+      .switchMap((params: Params) => this.playerService.getPlayer(+params['id']))
       .subscribe(player => this.player = player);
   }
 
@@ -32,6 +32,13 @@ export class PlayerDetailComponent implements OnInit {
 
   edit(): void {
     this.isEditing = !this.isEditing;
+  }
+
+  save(): void {
+    this.playerService.update(this.player)
+    .then(() => {
+      this.isEditing = !this.isEditing;
+    });
   }
   
   @Input()

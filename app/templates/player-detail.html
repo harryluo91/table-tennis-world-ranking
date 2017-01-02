@@ -16,10 +16,15 @@
                     <label>name: </label>
                     <input [(ngModel)]="player.name" placeholder="name"/>
                 </div>
+                <div>
+                    <label>ranking: </label>
+                    <input [(ngModel)]="player.ranking" placeholder="ranking"/>
+                </div>
             </div>
         </md-card-content>
         <md-card-actions class="player-card__actions">
-            <button md-button (click)="edit()">EDIT</button>
+            <button md-button *ngIf="!isEditing" (click)="edit()">EDIT</button>
+            <button md-button *ngIf="isEditing" (click)="save()">SAVE</button>
             <button md-button (click)="goBack()">BACK</button>
         </md-card-actions>
     </md-card>
