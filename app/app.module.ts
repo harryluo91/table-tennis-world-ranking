@@ -5,7 +5,6 @@ import { MaterialModule } from '@angular/material';
 import { RouterModule }   from '@angular/router';
 import { HttpModule }    from '@angular/http';
 
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './in-memory-data.service';
 
 import { AppComponent }  from './app.component';
@@ -23,7 +22,6 @@ import { SortPlayersPipe } from './sort-players.pipe';
     MaterialModule.forRoot(),
     AppRoutingModule,
     HttpModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
   ],
   declarations: [ AppComponent, PlayersListComponent, PlayerDetailComponent, SortPlayersPipe ],
   providers: [PlayerService],

@@ -51,6 +51,14 @@ export class PlayerService {
             .catch(this.handleError);
     }
 
+    test(): Promise<void> {
+        return this.http.get('http://localhost:1337/api/users/')
+        .toPromise()
+        .then((res) => {
+            console.log(res);
+        });
+    }
+
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);

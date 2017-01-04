@@ -45,7 +45,8 @@ export class PlayersListComponent implements OnInit  {
   }
 
   ngOnInit(): void {
-    this.getPlayers();
+    // this.getPlayers();
+    this.playerService.test();
     this.isAddingPlayer = false;
   }
 
