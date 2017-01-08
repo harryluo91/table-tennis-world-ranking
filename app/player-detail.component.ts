@@ -5,6 +5,7 @@ import 'rxjs/add/operator/switchMap';
 
 import { Player } from './player';
 import { PlayerService } from './player.service';
+import { PlayerSailsService } from './player.sails.service';
 
 @Component({
   selector: 'player-detail',
@@ -15,6 +16,7 @@ export class PlayerDetailComponent implements OnInit {
   isEditing: boolean;
   constructor(
     private playerService: PlayerService,
+    private playerSailsService: PlayerSailsService,
     private route: ActivatedRoute,
     private location: Location
   ) {}
@@ -22,8 +24,8 @@ export class PlayerDetailComponent implements OnInit {
   ngOnInit(): void {
     this.isEditing = false;
     this.route.params
-      .switchMap((params: Params) => this.playerService.getPlayer(+params['id']))
-      .subscribe(player => this.player = player);
+      .switchMap((params: Params) => this.playerSailsService.getPlayer(+params['id']))
+      .subscribe((player) => this.player = player);
   }
 
   goBack(): void {
@@ -35,7 +37,7 @@ export class PlayerDetailComponent implements OnInit {
   }
 
   save(): void {
-    this.playerService.update(this.player)
+    this.playerSailsService.updatePlayer(this.player)
     .then(() => {
       this.isEditing = !this.isEditing;
     });

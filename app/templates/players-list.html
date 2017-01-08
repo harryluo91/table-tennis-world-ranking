@@ -1,7 +1,7 @@
 <div class="players-list">
     <md-nav-list>
         <md-list-item *ngFor="let player of (players | sortPlayers)" [class.selected]="player === selectedPlayer">
-            <a md-line [routerLink]="['/player-details', player.id]" >{{player.ranking}}. {{player.name}}</a>
+            <a md-line [routerLink]="['/player-details', player.id]" >{{player.ranking}}. {{player.firstName}} {{player.lastName}}</a>
             <button md-icon-button (click)="delete(player)">
                 <md-icon>delete</md-icon>
             </button>
@@ -11,10 +11,14 @@
         <button md-button *ngIf="!isAddingPlayer" (click)="add()">ADD</button>
         <div class="add-player__block" *ngIf="isAddingPlayer">
             <div class="add-player__form">
-                <label>name: </label>
-                <input [(ngModel)]="newPlayer" placeholder="name"/>
+                <label>First Name: </label>
+                <input [(ngModel)]="firstName" placeholder="First Name"/>
             </div>
-            <button md-button (click)="create(newPlayer)">OK</button>
+            <div class="add-player__form">
+                <label>Last Name: </label>
+                <input [(ngModel)]="lastName" placeholder="Last Name"/>
+            </div>
+            <button md-button (click)="create(firstName, lastName)">OK</button>
         </div>
     </div>
 </div>

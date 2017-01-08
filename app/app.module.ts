@@ -13,6 +13,7 @@ import { PlayerDetailComponent } from './player-detail.component';
 import { AppRoutingModule }     from './app-routing.module';
 
 import { PlayerService } from './player.service';
+import { PlayerSailsService } from './player.sails.service';
 import { SortPlayersPipe } from './sort-players.pipe';
 
 @NgModule({
@@ -24,7 +25,7 @@ import { SortPlayersPipe } from './sort-players.pipe';
     HttpModule,
   ],
   declarations: [ AppComponent, PlayersListComponent, PlayerDetailComponent, SortPlayersPipe ],
-  providers: [PlayerService],
+  providers: [PlayerService, PlayerSailsService],
   bootstrap:    [ AppComponent ],
 })
 

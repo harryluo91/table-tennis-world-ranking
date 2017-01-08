@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Player } from './player';
 import { PlayerService } from './player.service';
+import { PlayerSailsService } from './player.sails.service';
 
 @Component({
   selector: 'players-list',
@@ -12,19 +13,26 @@ export class PlayersListComponent implements OnInit  {
   selectedPlayer: Player;
   isAddingPlayer: boolean;
 
-  constructor(private playerService: PlayerService) { }
+  constructor(
+    private playerService: PlayerService,
+    private playerSailsService: PlayerSailsService
+  ) { }
 
   getPlayers(): void {
-    this.playerService.getPlayers().then(players => this.players = players);
+    this.playerSailsService.getPlayers().then((players) => 
+    {
+      this.players = players;
+    });
   }
 
-  create(name: string): void {
-    name = name.trim();
-    if (!name) { 
+  create(firstName: string, lastName: string): void {
+    firstName = firstName.trim();
+    lastName = lastName.trim();
+    if (!firstName || !lastName) { 
       this.add();
       return; 
     }
-    this.playerService.create(name)
+    this.playerSailsService.create(firstName, lastName)
         .then(player => {
           this.players.push(player);
           this.selectedPlayer = null;
@@ -37,7 +45,7 @@ export class PlayersListComponent implements OnInit  {
   }
 
   delete(player: Player): void {
-    this.playerService
+    this.playerSailsService
         .delete(player.id)
         .then(() => {
           this.getPlayers();
@@ -45,8 +53,7 @@ export class PlayersListComponent implements OnInit  {
   }
 
   ngOnInit(): void {
-    // this.getPlayers();
-    this.playerService.test();
+    this.getPlayers();
     this.isAddingPlayer = false;
   }
 

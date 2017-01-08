@@ -2,7 +2,7 @@
     <md-card class="player-card">
         <md-card-header class="player-card__header">
             <div md-card-avatar class="player-avatar-image"></div>
-            <md-card-title>{{player.name}}</md-card-title>
+            <md-card-title>{{player.firstName}} {{player.lastName}}</md-card-title>
             <md-card-subtitle>Ranking: {{player.ranking}}</md-card-subtitle>
         </md-card-header>
         <md-card-content class="player-card__content">
@@ -13,8 +13,12 @@
             </div>
             <div class="player-card__content--edit" *ngIf="isEditing">
                 <div>
-                    <label>name: </label>
-                    <input [(ngModel)]="player.name" placeholder="name"/>
+                    <label>First Name: </label>
+                    <input [(ngModel)]="player.firstName" placeholder="First Name"/>
+                </div>
+                <div>
+                    <label>Last Name: </label>
+                    <input [(ngModel)]="player.lastName" placeholder="Last Name"/>
                 </div>
                 <div>
                     <label>ranking: </label>
