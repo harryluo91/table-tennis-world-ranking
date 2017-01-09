@@ -5,6 +5,7 @@ import { MaterialModule } from '@angular/material';
 import { RouterModule }   from '@angular/router';
 import { HttpModule }    from '@angular/http';
 
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './in-memory-data.service';
 
 import { AppComponent }  from './app.component';
@@ -13,6 +14,7 @@ import { PlayerDetailComponent } from './player-detail.component';
 import { AppRoutingModule }     from './app-routing.module';
 
 import { PlayerService } from './player.service';
+import { MatchService } from './match.service';
 import { PlayerSailsService } from './player.sails.service';
 import { SortPlayersPipe } from './sort-players.pipe';
 
@@ -23,9 +25,10 @@ import { SortPlayersPipe } from './sort-players.pipe';
     MaterialModule.forRoot(),
     AppRoutingModule,
     HttpModule,
+    InMemoryWebApiModule.forRoot(InMemoryDataService),
   ],
   declarations: [ AppComponent, PlayersListComponent, PlayerDetailComponent, SortPlayersPipe ],
-  providers: [PlayerService, PlayerSailsService],
+  providers: [PlayerService, PlayerSailsService, MatchService],
   bootstrap:    [ AppComponent ],
 })
 

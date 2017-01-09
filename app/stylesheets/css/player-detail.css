@@ -1,1 +1,15 @@
-.player-detail .player-card__header{justify-content:center}.player-detail .player-card__header .player-avatar-image{background-image:url("app/assets/ping-pong-ball.png");background-size:cover}.player-detail .player-card__content{text-align:center}.player-detail .player-card__actions{text-align:center}
+.player-detail .player-card__header {
+  justify-content: center; }
+  .player-detail .player-card__header .player-avatar-image {
+    background-image: url("app/assets/ping-pong-ball.png");
+    background-size: cover; }
+
+.player-detail .player-card__content {
+  text-align: center; }
+  .player-detail .player-card__content .match-history__player-name {
+    flex-basis: 20%; }
+  .player-detail .player-card__content .match-history__progress-bar {
+    flex-basis: 60%; }
+
+.player-detail .player-card__actions {
+  text-align: center; }

@@ -3,4 +3,5 @@ export class Player {
   firstName: string;
   lastName: string;
   ranking: string;
+  matches: Array<any>;
 }

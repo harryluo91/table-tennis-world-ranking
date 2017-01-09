@@ -7,9 +7,25 @@
         </md-card-header>
         <md-card-content class="player-card__content">
             <div class="player-card__content--static">
-                <p>
-                    Match history
-                </p>
+                <md-list class="match-history">
+                    <h3 md-subheader>Match History</h3>
+                    <div class="match-history__item">
+                        <md-list-item *ngFor="let match of matches">
+                            <div class="match-history__player-name">
+                                <span>{{match.playerOne.firstName}} {{match.playerOne.lastName}}</span>
+                            </div>
+                            <md-progress-bar
+                                class="match-history__progress-bar"
+                                color="primary"
+                                mode="determinate"
+                                [value]="this.pointsCalculator(match.playerOnePoints, match.playerTwoPoints)" >
+                            </md-progress-bar>
+                            <div class="match-history__player-name">
+                                <span>{{match.playerTwo.firstName}} {{match.playerTwo.lastName}}</span>
+                            </div>
+                        </md-list-item>
+                    </div>
+                </md-list>
             </div>
             <div class="player-card__content--edit" *ngIf="isEditing">
                 <div>

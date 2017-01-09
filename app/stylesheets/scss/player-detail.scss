@@ -11,6 +11,16 @@
 
         &__content {
             text-align: center;
+
+            .match-history {
+                &__player-name {
+                    flex-basis: 20%;
+                }
+
+                &__progress-bar {
+                    flex-basis: 60%;
+                }
+            }
         }
 
         &__actions {

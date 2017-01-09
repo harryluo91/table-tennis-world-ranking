@@ -22,11 +22,14 @@ export class PlayerService {
         const url = `${this.playersUrl}/${id}`;
         return this.http.get(url)
             .toPromise()
-            .then(response => response.json().data as Player)
+            .then(response => {
+                console.log(response)
+                return response.json().data as Player
+            })
             .catch(this.handleError);
     }
 
-    update(player: Player): Promise<Player> {
+    updatePlayer(player: Player): Promise<Player> {
         const url = `${this.playersUrl}/${player.id}`;
         return this.http
             .put(url, JSON.stringify(player), {headers: this.headers})
@@ -35,9 +38,9 @@ export class PlayerService {
             .catch(this.handleError);
     }
 
-    create(name: string): Promise<Player> {
+    create(firstName: string, lastName: string): Promise<Player> {
         return this.http
-            .post(this.playersUrl, JSON.stringify({name: name}), {headers: this.headers})
+            .post(this.playersUrl, JSON.stringify({firstName: firstName, lastName: lastName}), {headers: this.headers})
             .toPromise()
             .then(res => res.json().data)
             .catch(this.handleError);
