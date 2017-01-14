@@ -16,6 +16,7 @@ import { AppRoutingModule }     from './app-routing.module';
 import { PlayerService } from './player.service';
 import { MatchService } from './match.service';
 import { PlayerSailsService } from './player.sails.service';
+import { MatchSailsService } from './match.sails.service';
 import { SortPlayersPipe } from './sort-players.pipe';
 
 @NgModule({
@@ -28,7 +29,7 @@ import { SortPlayersPipe } from './sort-players.pipe';
     InMemoryWebApiModule.forRoot(InMemoryDataService),
   ],
   declarations: [ AppComponent, PlayersListComponent, PlayerDetailComponent, SortPlayersPipe ],
-  providers: [PlayerService, PlayerSailsService, MatchService],
+  providers: [PlayerService, PlayerSailsService, MatchService, MatchSailsService],
   bootstrap:    [ AppComponent ],
 })
 

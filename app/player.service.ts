@@ -23,7 +23,6 @@ export class PlayerService {
         return this.http.get(url)
             .toPromise()
             .then(response => {
-                console.log(response)
                 return response.json().data as Player
             })
             .catch(this.handleError);

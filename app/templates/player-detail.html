@@ -1,7 +1,7 @@
 <div class="player-detail" *ngIf="player">
     <md-card class="player-card">
         <md-card-header class="player-card__header">
-            <div md-card-avatar class="player-avatar-image"></div>
+            <div md-card-avatar class="player-avatar-image" [ngStyle]="{ 'background-image': 'url(' + player.avatar + ')'}"></div>
             <md-card-title>{{player.firstName}} {{player.lastName}}</md-card-title>
             <md-card-subtitle>Ranking: {{player.ranking}}</md-card-subtitle>
         </md-card-header>
@@ -12,7 +12,7 @@
                     <div class="match-history__item">
                         <md-list-item *ngFor="let match of matches">
                             <div class="match-history__player-name">
-                                <span>{{match.playerOne.firstName}} {{match.playerOne.lastName}}</span>
+                                <span>{{match.playerOne.firstName}} {{match.playerOne.lastName}} ({{match.playerOnePoints}})</span>
                             </div>
                             <md-progress-bar
                                 class="match-history__progress-bar"
@@ -21,7 +21,7 @@
                                 [value]="this.pointsCalculator(match.playerOnePoints, match.playerTwoPoints)" >
                             </md-progress-bar>
                             <div class="match-history__player-name">
-                                <span>{{match.playerTwo.firstName}} {{match.playerTwo.lastName}}</span>
+                                <span>{{match.playerTwo.firstName}} {{match.playerTwo.lastName}} ({{match.playerTwoPoints}})</span>
                             </div>
                         </md-list-item>
                     </div>

@@ -8,6 +8,7 @@ import { Match } from './match';
 import { PlayerService } from './player.service';
 import { PlayerSailsService } from './player.sails.service';
 import { MatchService } from './match.service';
+import { MatchSailsService } from './match.sails.service';
 
 @Component({
   selector: 'player-detail',
@@ -21,6 +22,7 @@ export class PlayerDetailComponent implements OnInit {
     private playerService: PlayerService,
     private playerSailsService: PlayerSailsService,
     private matchService: MatchService,
+    private matchSailsService: MatchSailsService,
     private route: ActivatedRoute,
     private location: Location
   ) {}
@@ -28,17 +30,15 @@ export class PlayerDetailComponent implements OnInit {
   ngOnInit(): void {
     this.isEditing = false;
     this.route.params
-      .switchMap((params: Params) => this.playerService.getPlayer(+params['id']))
+      .switchMap((params: Params) => this.playerSailsService.getPlayer(+params['id']))
       .subscribe((player) => {
-        console.log(player)
-        this.player = player
+        this.player = player;
+        this.getPlayerMatches(this.player);
       });
-    this.getMatches();
   }
 
-  getMatches(): void {
-    this.matchService.getMatches().then((matches: Match[]) => {
-      console.log(matches)
+  getPlayerMatches(player: Player): void {
+    this.matchService.getPlayerMatches(player.id).then((matches: Match[]) => {
       this.matches = matches;
     })
   }
@@ -52,7 +52,7 @@ export class PlayerDetailComponent implements OnInit {
   }
 
   save(): void {
-    this.playerService.updatePlayer(this.player)
+    this.playerSailsService.updatePlayer(this.player)
     .then(() => {
       this.isEditing = !this.isEditing;
     });

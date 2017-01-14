@@ -5,25 +5,17 @@ import 'rxjs/add/operator/toPromise';
 import { Match } from './match';
 
 @Injectable()
-export class MatchService {
+export class MatchSailsService {
     private headers = new Headers({'Content-Type': 'application/json'});
-    private matchesUrl = 'api/matches';  // URL to web api
+    private baseUrl = 'http://localhost:1337/api';  // URL to web api
 
     constructor(private http: Http) { }
 
-    getPlayerMatches(id: number): Promise<Match[]> {
-        return this.http.get(this.matchesUrl)
+    getPlayerMatches(playerId: number): Promise<Match[]> {
+        return this.http.get(`${this.baseUrl}/matches/${playerId}`)
                .toPromise()
-               .then((response) => {
-                   return this.playerMatchSelector(response.json().data, id) as Match[];
-               })
+               .then(response => response.json().data as Match[])
                .catch(this.handleError);
-    }
-
-    private playerMatchSelector(matches: Match[], id: number): Array<Match> {
-        return matches.filter((match) => {
-            return match.playerOne.id === id || match.playerTwo.id === id;
-        })
     }
 
     private handleError(error: any): Promise<any> {

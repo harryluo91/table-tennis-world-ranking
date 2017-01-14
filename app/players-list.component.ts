@@ -21,7 +21,6 @@ export class PlayersListComponent implements OnInit  {
   getPlayers(): void {
     this.playerService.getPlayers().then((players) => 
     {
-      console.log(players)
       this.players = players;
     });
   }
@@ -33,7 +32,7 @@ export class PlayersListComponent implements OnInit  {
       this.add();
       return; 
     }
-    this.playerService.create(firstName, lastName)
+    this.playerSailsService.create(firstName, lastName)
         .then(player => {
           this.players.push(player);
           this.selectedPlayer = null;

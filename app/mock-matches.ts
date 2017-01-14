@@ -1,23 +1,110 @@
 import { Match } from './match';
-import { Kobe, Lebron } from './mock-players';
+import { PLAYERS } from './mock-players';
 
-export const MatchOne: Match = {
-    id: 0,
-    playerOne: Kobe,
-    playerTwo: Lebron,
-    playerOnePoints: '11',
-    playerTwoPoints: '9'
-}
-
-export const MatchTwo: Match = {
-    id: 0,
-    playerOne: Kobe,
-    playerTwo: Lebron,
-    playerOnePoints: '11',
-    playerTwoPoints: '7'
-}
-
-export const MATCHES: Match[] = [
-    MatchOne,
-    MatchTwo
-]
+export const MATCHES = [
+    {
+        id: 1,
+        playerOne: PLAYERS[0],
+        playerTwo: PLAYERS[1],
+        playerOnePoints: 11,
+        playerTwoPoints: 8, 
+    },
+    {
+        id: 2,
+        playerOne: PLAYERS[0],
+        playerTwo: PLAYERS[2],
+        playerOnePoints: 11,
+        playerTwoPoints: 6,
+    },
+    {
+        id: 3,
+        playerOne: PLAYERS[0],
+        playerTwo: PLAYERS[3],
+        playerOnePoints: 11,
+        playerTwoPoints: 9,
+    },
+    {
+        id: 4,
+        playerOne: PLAYERS[0],
+        playerTwo: PLAYERS[9],
+        playerOnePoints: 11,
+        playerTwoPoints: 4,
+    },
+    {
+        id: 5,
+        playerOne: PLAYERS[0],
+        playerTwo: PLAYERS[4],
+        playerOnePoints: 11,
+        playerTwoPoints: 8,
+    },
+    {
+        id: 6,
+        playerOne: PLAYERS[1],
+        playerTwo: PLAYERS[8],
+        playerOnePoints: 11,
+        playerTwoPoints: 5,
+    },
+    {
+        id: 7,
+        playerOne: PLAYERS[1],
+        playerTwo: PLAYERS[2],
+        playerOnePoints: 11,
+        playerTwoPoints: 9,
+    },
+    {
+        id: 8,
+        playerOne: PLAYERS[1],
+        playerTwo: PLAYERS[6],
+        playerOnePoints: 11,
+        playerTwoPoints: 8,
+    },
+    {
+        id: 9,
+        playerOne: PLAYERS[1],
+        playerTwo: PLAYERS[5],
+        playerOnePoints: 11,
+        playerTwoPoints: 4,
+    },
+    {
+        id: 10,
+        playerOne: PLAYERS[2],
+        playerTwo: PLAYERS[9],
+        playerOnePoints: 11,
+        playerTwoPoints: 6,
+    },
+    {
+        id: 11,
+        playerOne: PLAYERS[2],
+        playerTwo: PLAYERS[7],
+        playerOnePoints: 11,
+        playerTwoPoints: 8,
+    },
+    {
+        id: 12,
+        playerOne: PLAYERS[2],
+        playerTwo: PLAYERS[8],
+        playerOnePoints: 11,
+        playerTwoPoints: 5,
+    },
+    {
+        id: 13,
+        playerOne: PLAYERS[3],
+        playerTwo: PLAYERS[2],
+        playerOnePoints: 11,
+        playerTwoPoints: 5,
+    },
+    {
+        id: 14,
+        playerOne: PLAYERS[3],
+        playerTwo: PLAYERS[6],
+        playerOnePoints: 11,
+        playerTwoPoints: 8,
+    },
+    {
+        id: 15,
+        playerOne: PLAYERS[3],
+        playerTwo: PLAYERS[7],
+        playerOnePoints: 11,
+        playerTwoPoints: 6,
+    }
+];
