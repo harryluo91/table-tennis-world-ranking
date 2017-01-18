@@ -16,8 +16,20 @@
             text-align: center;
 
             .match-history {
+                &__button-group {
+                    width: 100%;
+                }
+
+                &__button-wrapper {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
                 &__player-name {
-                    flex-basis: 20%;
+                    white-space: normal;
+                    padding: 5px;
+                    width: 20%;
                 }
 
                 &__progress-bar {

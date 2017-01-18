@@ -9,21 +9,39 @@
             <div class="player-card__content--static">
                 <md-list class="match-history">
                     <h3 md-subheader>Match History</h3>
-                    <div class="match-history__item">
-                        <md-list-item *ngFor="let match of matches">
-                            <div class="match-history__player-name">
-                                <span>{{match.playerOne.firstName}} {{match.playerOne.lastName}} ({{match.playerOnePoints}})</span>
-                            </div>
-                            <md-progress-bar
-                                class="match-history__progress-bar"
-                                color="primary"
-                                mode="determinate"
-                                [value]="this.pointsCalculator(match.playerOnePoints, match.playerTwoPoints)" >
-                            </md-progress-bar>
-                            <div class="match-history__player-name">
-                                <span>{{match.playerTwo.firstName}} {{match.playerTwo.lastName}} ({{match.playerTwoPoints}})</span>
-                            </div>
-                        </md-list-item>
+                    <div class="match-history__content">
+                        <div class="match-history__item-wrapper" *ngFor="let match of matches; let i = index">
+                            <md-list-item class="match-history__displayed-item">
+                                <button md-button (click)="editMatch(i)" class="match-history__button-group">
+                                    <div class="match-history__button-wrapper">
+                                        <div class="match-history__player-name">
+                                            <span>{{match.playerOne.firstName}} {{match.playerOne.lastName}} ({{match.playerOnePoints}})</span>
+                                        </div>
+                                        <div class="match-history__progress-bar">
+                                            <md-progress-bar
+                                                color="primary"
+                                                mode="determinate"
+                                                [value]="this.pointsCalculator(match.playerOnePoints, match.playerTwoPoints)" >
+                                            </md-progress-bar>
+                                        </div>
+                                        <div class="match-history__player-name">
+                                            <span>{{match.playerTwo.firstName}} {{match.playerTwo.lastName}} ({{match.playerTwoPoints}})</span>
+                                        </div>
+                                    </div>
+                                </button>          
+                            </md-list-item>
+                            <md-list-item class="match-history__edit-item" *ngIf="isEditingMatch[i]">
+                                <div>
+                                    <label>Player One Points: </label>
+                                    <input [(ngModel)]="match.playerOnePoints"/>
+                                </div>
+                                <div>
+                                    <label>Player Two Points: </label>
+                                    <input [(ngModel)]="match.playerTwoPoints"/>
+                                </div>
+                                <button md-button (click)="saveMatch(i)">SAVE</button>
+                            </md-list-item>
+                        </div>
                     </div>
                 </md-list>
             </div>
@@ -43,7 +61,7 @@
             </div>
         </md-card-content>
         <md-card-actions class="player-card__actions">
-            <button md-button *ngIf="!isEditing" (click)="edit()">EDIT</button>
+            <button md-button *ngIf="!isEditing" (click)="editPlayer()">EDIT</button>
             <button md-button *ngIf="isEditing" (click)="save()">SAVE</button>
             <button md-button (click)="goBack()">BACK</button>
         </md-card-actions>

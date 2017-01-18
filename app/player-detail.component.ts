@@ -19,6 +19,7 @@ import { MatchJSONService } from './match.json.service';
 })
 export class PlayerDetailComponent implements OnInit {
   isEditing: boolean;
+  isEditingMatch: boolean[] = [];
   matches: Match[];
   constructor(
     private playerService: PlayerService,
@@ -34,15 +35,19 @@ export class PlayerDetailComponent implements OnInit {
   ngOnInit(): void {
     this.isEditing = false;
     this.route.params
-      .switchMap((params: Params) => this.playerJSONService.getPlayer(+params['id']))
+      .switchMap((params: Params) => this.playerSailsService.getPlayer(+params['id']))
       .subscribe((player) => {
         this.player = player;
-        this.getPlayerMatches(this.player);
+        this.matches = player.matches;
+        // this.getPlayerMatches(this.player);
+        for (var i = 0; i < this.matches.length; i++) {
+          this.isEditingMatch.push(false);
+        }
       });
   }
 
   getPlayerMatches(player: Player): void {
-    this.matchJSONService.getPlayerMatches(player.id).then((matches: Match[]) => {
+    this.matchSailsService.getPlayerMatches(player.id).then((matches: Match[]) => {
       this.matches = matches;
     })
   }
@@ -51,15 +56,26 @@ export class PlayerDetailComponent implements OnInit {
     this.location.back();
   }
 
-  edit(): void {
+  editPlayer(): void {
     this.isEditing = !this.isEditing;
   }
 
+  editMatch(i: number): void {
+    console.log(i);
+    this.isEditingMatch[i] = !this.isEditingMatch[i];
+  }
+
   save(): void {
-    this.playerJSONService.updatePlayer(this.player)
+    this.playerSailsService.updatePlayer(this.player)
     .then(() => {
       this.isEditing = !this.isEditing;
     });
+  }
+
+  saveMatch(i: number): void {
+    this.matchSailsService.updateMatchScores(this.matches[i]).then(() => {
+      this.isEditingMatch[i] = !this.isEditingMatch[i];
+    })
   }
 
   pointsCalculator(a: string, b: string): Number {
