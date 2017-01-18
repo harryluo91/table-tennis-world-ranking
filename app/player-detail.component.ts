@@ -7,8 +7,10 @@ import { Player } from './player';
 import { Match } from './match';
 import { PlayerService } from './player.service';
 import { PlayerSailsService } from './player.sails.service';
+import { PlayerJSONService } from './player.json.service';
 import { MatchService } from './match.service';
 import { MatchSailsService } from './match.sails.service';
+import { MatchJSONService } from './match.json.service';
 
 @Component({
   selector: 'player-detail',
@@ -21,8 +23,10 @@ export class PlayerDetailComponent implements OnInit {
   constructor(
     private playerService: PlayerService,
     private playerSailsService: PlayerSailsService,
+    private playerJSONService: PlayerJSONService,
     private matchService: MatchService,
     private matchSailsService: MatchSailsService,
+    private matchJSONService: MatchJSONService,
     private route: ActivatedRoute,
     private location: Location
   ) {}
@@ -30,7 +34,7 @@ export class PlayerDetailComponent implements OnInit {
   ngOnInit(): void {
     this.isEditing = false;
     this.route.params
-      .switchMap((params: Params) => this.playerSailsService.getPlayer(+params['id']))
+      .switchMap((params: Params) => this.playerJSONService.getPlayer(+params['id']))
       .subscribe((player) => {
         this.player = player;
         this.getPlayerMatches(this.player);
@@ -38,7 +42,7 @@ export class PlayerDetailComponent implements OnInit {
   }
 
   getPlayerMatches(player: Player): void {
-    this.matchService.getPlayerMatches(player.id).then((matches: Match[]) => {
+    this.matchJSONService.getPlayerMatches(player.id).then((matches: Match[]) => {
       this.matches = matches;
     })
   }
@@ -52,7 +56,7 @@ export class PlayerDetailComponent implements OnInit {
   }
 
   save(): void {
-    this.playerSailsService.updatePlayer(this.player)
+    this.playerJSONService.updatePlayer(this.player)
     .then(() => {
       this.isEditing = !this.isEditing;
     });

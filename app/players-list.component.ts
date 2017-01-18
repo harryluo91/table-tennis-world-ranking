@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Player } from './player';
 import { PlayerService } from './player.service';
 import { PlayerSailsService } from './player.sails.service';
+import { PlayerJSONService } from './player.json.service';
 
 @Component({
   selector: 'players-list',
@@ -15,11 +16,12 @@ export class PlayersListComponent implements OnInit  {
 
   constructor(
     private playerService: PlayerService,
-    private playerSailsService: PlayerSailsService
+    private playerSailsService: PlayerSailsService,
+    private playerJSONService: PlayerJSONService
   ) { }
 
   getPlayers(): void {
-    this.playerService.getPlayers().then((players) => 
+    this.playerJSONService.getPlayers().then((players) => 
     {
       this.players = players;
     });
@@ -32,7 +34,7 @@ export class PlayersListComponent implements OnInit  {
       this.add();
       return; 
     }
-    this.playerSailsService.create(firstName, lastName)
+    this.playerJSONService.create(firstName, lastName)
         .then(player => {
           this.players.push(player);
           this.selectedPlayer = null;
@@ -45,7 +47,7 @@ export class PlayersListComponent implements OnInit  {
   }
 
   delete(player: Player): void {
-    this.playerSailsService
+    this.playerJSONService
         .delete(player.id)
         .then(() => {
           this.getPlayers();
