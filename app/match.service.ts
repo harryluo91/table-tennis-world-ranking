@@ -8,16 +8,18 @@ import { Match } from './match';
 export class MatchService {
     private headers = new Headers({'Content-Type': 'application/json'});
     private matchesUrl = 'api/matches';  // URL to web api
+    private matchesUrlSails = 'http://localhost:1337/api/matches';
+    private matchesUrlJSON = 'http://localhost:1338/api/matches';
 
     constructor(private http: Http) { }
 
     getPlayerMatches(id: number): Promise<Match[]> {
-        return this.http.get(this.matchesUrl)
-               .toPromise()
-               .then((response) => {
-                   return this.playerMatchSelector(response.json().data, id) as Match[];
-               })
-               .catch(this.handleError);
+        return this.http.get(this.matchesUrlJSON)
+                .toPromise()
+                .then((response) => {
+                    return this.playerMatchSelector(response.json().data, id) as Match[];
+                })
+                .catch(this.handleError);
     }
 
     updateMatchScores(match: Match): Promise<Match> {
@@ -26,7 +28,7 @@ export class MatchService {
             playerOnePoints: match.playerOnePoints,
             playerTwoPoints: match.playerTwoPoints
         }
-        return this.http.put(`${this.matchesUrl}/${matchId}`, JSON.stringify(match), {headers: this.headers})
+        return this.http.put(`${this.matchesUrlJSON}/${matchId}`, JSON.stringify(match), {headers: this.headers})
             .toPromise()
             .then(() => match)
             .catch(this.handleError);
@@ -44,3 +46,10 @@ export class MatchService {
     }
 
 }
+
+// getPlayerMatches(playerId: number): Promise<Match[]> {
+//     return this.http.get(`${this.baseUrl}/matches/${playerId}`)
+//             .toPromise()
+//             .then(response => response.json().data as Match[])
+//             .catch(this.handleError);
+// }

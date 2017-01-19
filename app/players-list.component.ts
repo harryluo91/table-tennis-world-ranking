@@ -21,7 +21,7 @@ export class PlayersListComponent implements OnInit  {
   ) { }
 
   getPlayers(): void {
-    this.playerJSONService.getPlayers().then((players) => 
+    this.playerService.getPlayers().then((players) => 
     {
       this.players = players;
     });
@@ -34,7 +34,7 @@ export class PlayersListComponent implements OnInit  {
       this.add();
       return; 
     }
-    this.playerJSONService.create(firstName, lastName)
+    this.playerService.create(firstName, lastName)
         .then(player => {
           this.players.push(player);
           this.selectedPlayer = null;
@@ -47,7 +47,7 @@ export class PlayersListComponent implements OnInit  {
   }
 
   delete(player: Player): void {
-    this.playerJSONService
+    this.playerService
         .delete(player.id)
         .then(() => {
           this.getPlayers();

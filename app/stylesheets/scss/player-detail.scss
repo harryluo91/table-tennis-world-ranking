@@ -35,6 +35,12 @@
                 &__progress-bar {
                     flex-basis: 60%;
                 }
+
+                &__edit-item {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
             }
         }
 
