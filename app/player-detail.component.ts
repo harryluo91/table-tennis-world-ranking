@@ -35,10 +35,10 @@ export class PlayerDetailComponent implements OnInit {
   ngOnInit(): void {
     this.isEditing = false;
     this.route.params
-      .switchMap((params: Params) => this.playerService.getPlayer(+params['id']))
+      .switchMap((params: Params) => this.playerJSONService.getPlayer(+params['id']))
       .subscribe((player) => {
         this.player = player;
-        this.matches = player.matches;
+        // this.matches = player.matches;
         this.getPlayerMatches(this.player);
         // for (var i = 0; i < this.matches.length; i++) {
         //   this.isEditingMatch.push(false);
@@ -47,7 +47,7 @@ export class PlayerDetailComponent implements OnInit {
   }
 
   getPlayerMatches(player: Player): void {
-    this.matchService.getPlayerMatches(player.id).then((matches: Match[]) => {
+    this.matchJSONService.getPlayerMatches(player.id).then((matches: Match[]) => {
       this.matches = matches;
       for (var i = 0; i < this.matches.length; i++) {
         this.isEditingMatch.push(false);
@@ -69,14 +69,14 @@ export class PlayerDetailComponent implements OnInit {
   }
 
   save(): void {
-    this.playerService.updatePlayer(this.player)
+    this.playerJSONService.updatePlayer(this.player)
     .then(() => {
       this.isEditing = !this.isEditing;
     });
   }
 
   saveMatch(i: number): void {
-    this.matchService.updateMatchScores(this.matches[i]).then(() => {
+    this.matchJSONService.updateMatchScores(this.matches[i]).then(() => {
       this.isEditingMatch[i] = !this.isEditingMatch[i];
     })
   }

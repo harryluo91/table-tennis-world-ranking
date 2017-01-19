@@ -16,8 +16,21 @@ export class MatchJSONService {
                .toPromise()
                .then((response) => {
                    return this.playerMatchSelector(response.json().data, id) as Match[];
+                // return response.json().data as Match[];
                })
                .catch(this.handleError);
+    }
+
+    updateMatchScores(match: Match): Promise<Match> {
+        var matchId = match.id;
+        var scores = {
+            playerOnePoints: match.playerOnePoints,
+            playerTwoPoints: match.playerTwoPoints
+        }
+        return this.http.put(`${this.matchesUrl}/${matchId}`, JSON.stringify(match), {headers: this.headers})
+            .toPromise()
+            .then(() => match)
+            .catch(this.handleError);
     }
 
     private playerMatchSelector(matches: Match[], id: number): Array<Match> {

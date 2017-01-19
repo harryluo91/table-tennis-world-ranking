@@ -28,7 +28,7 @@ import { SortPlayersPipe } from './sort-players.pipe';
     MaterialModule.forRoot(),
     AppRoutingModule,
     HttpModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    // InMemoryWebApiModule.forRoot(InMemoryDataService),
   ],
   declarations: [ AppComponent, PlayersListComponent, PlayerDetailComponent, SortPlayersPipe ],
   providers: [PlayerService, PlayerSailsService, PlayerJSONService, MatchService, MatchSailsService, MatchJSONService],
