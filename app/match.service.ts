@@ -20,6 +20,18 @@ export class MatchService {
                .catch(this.handleError);
     }
 
+    updateMatchScores(match: Match): Promise<Match> {
+        var matchId = match.id;
+        var scores = {
+            playerOnePoints: match.playerOnePoints,
+            playerTwoPoints: match.playerTwoPoints
+        }
+        return this.http.put(`${this.matchesUrl}/${matchId}`, JSON.stringify(match), {headers: this.headers})
+            .toPromise()
+            .then(() => match)
+            .catch(this.handleError);
+    }
+
     private playerMatchSelector(matches: Match[], id: number): Array<Match> {
         return matches.filter((match) => {
             return match.playerOne.id === id || match.playerTwo.id === id;

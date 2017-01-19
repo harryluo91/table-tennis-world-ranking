@@ -35,20 +35,23 @@ export class PlayerDetailComponent implements OnInit {
   ngOnInit(): void {
     this.isEditing = false;
     this.route.params
-      .switchMap((params: Params) => this.playerSailsService.getPlayer(+params['id']))
+      .switchMap((params: Params) => this.playerService.getPlayer(+params['id']))
       .subscribe((player) => {
         this.player = player;
         this.matches = player.matches;
-        // this.getPlayerMatches(this.player);
-        for (var i = 0; i < this.matches.length; i++) {
-          this.isEditingMatch.push(false);
-        }
+        this.getPlayerMatches(this.player);
+        // for (var i = 0; i < this.matches.length; i++) {
+        //   this.isEditingMatch.push(false);
+        // }
       });
   }
 
   getPlayerMatches(player: Player): void {
-    this.matchSailsService.getPlayerMatches(player.id).then((matches: Match[]) => {
+    this.matchService.getPlayerMatches(player.id).then((matches: Match[]) => {
       this.matches = matches;
+      for (var i = 0; i < this.matches.length; i++) {
+        this.isEditingMatch.push(false);
+      }
     })
   }
 
@@ -66,14 +69,14 @@ export class PlayerDetailComponent implements OnInit {
   }
 
   save(): void {
-    this.playerSailsService.updatePlayer(this.player)
+    this.playerService.updatePlayer(this.player)
     .then(() => {
       this.isEditing = !this.isEditing;
     });
   }
 
   saveMatch(i: number): void {
-    this.matchSailsService.updateMatchScores(this.matches[i]).then(() => {
+    this.matchService.updateMatchScores(this.matches[i]).then(() => {
       this.isEditingMatch[i] = !this.isEditingMatch[i];
     })
   }
